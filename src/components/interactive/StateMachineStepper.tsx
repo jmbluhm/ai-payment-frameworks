@@ -267,6 +267,24 @@ export default function StateMachineStepper() {
         getStepColor={(i) => getStatusColor(steps[i].status)}
       />
 
+      {/* Navigation */}
+      <div className="flex justify-between items-center mb-8">
+        <Button variant="secondary" onClick={prevStep} disabled={currentStep === 0}>
+          <ChevronLeft size={20} className="inline mr-2" />
+          Previous
+        </Button>
+
+        <Button variant="secondary" onClick={reset}>
+          <RotateCcw size={20} className="inline mr-2" />
+          Reset
+        </Button>
+
+        <Button variant="primary" onClick={nextStep} disabled={currentStep === steps.length - 1}>
+          Next
+          <ChevronRight size={20} className="inline ml-2" />
+        </Button>
+      </div>
+
       {/* Current Step Details */}
       <div className="mb-8">
         <div className={`inline-block px-4 py-2 rounded-full text-body-sm font-semibold mb-4 ${getStatusColor(step.status)}`}>
@@ -291,24 +309,6 @@ export default function StateMachineStepper() {
             <CodeBlock code={step.response} language="json" />
           </div>
         </div>
-      </div>
-
-      {/* Navigation */}
-      <div className="flex justify-between items-center">
-        <Button variant="secondary" onClick={prevStep} disabled={currentStep === 0}>
-          <ChevronLeft size={20} className="inline mr-2" />
-          Previous
-        </Button>
-
-        <Button variant="secondary" onClick={reset}>
-          <RotateCcw size={20} className="inline mr-2" />
-          Reset
-        </Button>
-
-        <Button variant="primary" onClick={nextStep} disabled={currentStep === steps.length - 1}>
-          Next
-          <ChevronRight size={20} className="inline ml-2" />
-        </Button>
       </div>
     </Card>
   )
