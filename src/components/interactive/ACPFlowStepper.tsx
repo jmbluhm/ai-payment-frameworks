@@ -2,6 +2,7 @@ import { useState } from 'react'
 import Card from '../shared/Card'
 import CodeBlock from '../shared/CodeBlock'
 import Button from '../shared/Button'
+import StepIndicator from '../shared/StepIndicator'
 import { ChevronLeft, ChevronRight, RotateCcw } from 'lucide-react'
 
 const steps = [
@@ -158,46 +159,14 @@ export default function ACPFlowStepper() {
       <h3 className="text-h4 mb-6">ACP Checkout Flow: Step-by-Step</h3>
 
       {/* Progress Indicator */}
-      <div className="mb-8">
-        <div className="flex items-center justify-between mb-2">
-          {steps.map((_, i) => (
-            <div key={i} className="flex-1 flex items-center">
-              <button
-                onClick={() => setCurrentStep(i)}
-                className={`w-10 h-10 rounded-full flex items-center justify-center font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-[#635BFF] ${
-                  i === currentStep
-                    ? 'bg-[#635BFF] text-white'
-                    : i < currentStep
-                    ? 'bg-[#635BFF]/20 text-[#635BFF]'
-                    : 'bg-light-gray text-medium-gray'
-                }`}
-              >
-                {i + 1}
-              </button>
-              {i < steps.length - 1 && (
-                <div
-                  className={`flex-1 h-1 mx-2 ${
-                    i < currentStep ? 'bg-[#635BFF]' : 'bg-light-gray'
-                  }`}
-                />
-              )}
-            </div>
-          ))}
-        </div>
-        <div className="flex justify-between">
-          {steps.map((s, i) => (
-            <div
-              key={i}
-              className={`text-body-sm ${
-                i === currentStep ? 'text-dark font-semibold' : 'text-medium-gray'
-              }`}
-              style={{ width: `${100 / steps.length}%`, textAlign: 'center' }}
-            >
-              {s.title}
-            </div>
-          ))}
-        </div>
-      </div>
+      <StepIndicator
+        steps={steps}
+        currentStep={currentStep}
+        onStepClick={setCurrentStep}
+        activeColor="bg-[#635BFF] text-white"
+        completedColor="bg-[#635BFF]/20 text-[#635BFF]"
+        activeLineColor="bg-[#635BFF]"
+      />
 
       {/* Current Step Details */}
       <div className="mb-8">
